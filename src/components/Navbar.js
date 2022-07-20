@@ -18,7 +18,6 @@ const NavBar = () => {
             console.log(err)
         }
     };
-
     return (
         <Box sx={{ display: 'flex' }}>
             <AppBar>
@@ -32,6 +31,7 @@ const NavBar = () => {
                             Trending Movies
                         </Link>
                     </Typography>
+                    <Typography>Welcome {auth.currentUser?.email}</Typography>
                     <Box sx={{ display: 'flex' }}>
                         <Box sx={{ padding: 1 }}>
                             <Logout onClick={onLogout} />

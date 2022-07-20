@@ -8,6 +8,7 @@ function App() {
     <div className='App'>
       <NavBar />
       <Home />
+      <footer>2022 @derict</footer>
     </div>
   );
 }
