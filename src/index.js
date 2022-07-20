@@ -5,8 +5,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createTheme } from "@mui/system";
 import { ThemeProvider } from "@mui/material";
-import React from "react";
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./container/Login";
 import Register from "./container/Register";
@@ -32,36 +30,34 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route
-            path="login"
-            element={
-              <ProtectedRoute loginOnly={false}>
-                <Login />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="register"
-            element={
-              <ProtectedRoute loginOnly={false}>
-                <Register />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="movie/:movieId"
-            element={
-              <ProtectedRoute loginOnly={true}>
-                <DetailMovie />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<NoMatch />} />
-        </Routes>
-      </ThemeProvider>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route
+          path="login"
+          element={
+            <ProtectedRoute loginOnly={false}>
+              <Login />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="register"
+          element={
+            <ProtectedRoute loginOnly={false}>
+              <Register />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="movie/:movieId"
+          element={
+            <ProtectedRoute loginOnly={true}>
+              <DetailMovie />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<NoMatch />} />
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>
 );
