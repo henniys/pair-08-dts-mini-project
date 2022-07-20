@@ -1,5 +1,8 @@
 import "./App.css";
 
+import NavBar from "./components/Navbar";
+import Home from "./container/Home";
+
 import React from "react";
 
 import { ThemeProvider } from "@mui/material";
@@ -10,7 +13,8 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <Home></Home>
+        <NavBar />
+        <Home />
       </div>
     </ThemeProvider>
   );

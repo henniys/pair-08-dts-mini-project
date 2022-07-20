@@ -1,37 +1,53 @@
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Rating from "@mui/material/Rating";
-import * as React from "react";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Rating,
+  Typography,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-export default function MovieCard() {
+const IMAGE_URL = "https://image.tmdb.org/t/p/original";
+
+const MovieCard = ({ movie }) => {
+  let navigate = useNavigate();
+
+  const detailMovie = (movieId) => {
+    navigate(`/movie/${movieId}`);
+  };
+
   return (
-    <Card sx={{ display: "flex", mt: 20, width: "400px" }}>
-      <CardMedia
-        component="img"
-        sx={{ width: 151 }}
-        image="https://placekitten.com/400"
-        alt="Fantastic Beast"
-      />
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <CardContent sx={{ flex: "1 0 auto" }}>
-          <Typography component="div" variant="h5">
-            Fantastic Beast
+    <Card
+      id={movie.id}
+      sx={{
+        maxWidth: 250,
+        margin: 0.5,
+      }}
+      onClick={() => detailMovie(movie.id)}
+    >
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          width="250"
+          image={`${IMAGE_URL}${movie.poster_path}`}
+          alt={`${movie.title}`}
+        />
+        <CardContent>
+          <Rating
+            precision={0.1}
+            value={movie.vote_average / 2}
+            max={5}
+            readOnly
+          />
+          <Typography variant="subtitle1" color="text.secondary">
+            {new Date(movie.release_date).getFullYear()}
           </Typography>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            component="div"
-          >
-            2020
-          </Typography>
+          <Typography variant="h6">{movie.title}</Typography>
         </CardContent>
-        <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
-          <Rating sx={{ mr: 1 }} name="read-only" value={3} readOnly />
-        </Box>
-      </Box>
+      </CardActionArea>
     </Card>
   );
-}
+};
+
+export default MovieCard;
