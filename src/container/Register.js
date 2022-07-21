@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link, useNavigate } from 'react-router-dom'
 
-import { Avatar, Box, Button, Container, Grid, TextField, Typography } from "@mui/material"
+import { Avatar, Box, Button, Container, TextField, Typography } from "@mui/material"
 import { HowToRegOutlined } from "@mui/icons-material"
 
 import { createUserWithEmailAndPassword } from 'firebase/auth'
@@ -11,16 +11,16 @@ const Register = () => {
     const navigate = useNavigate()
     const [errorMessage, setErrorMessage] = useState('')
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         const data = new FormData(e.currentTarget)
         const email = data.get('email')
         const password = data.get('password')
 
-        try{
+        try {
             await createUserWithEmailAndPassword(auth, email, password)
             navigate("/")
-        }catch(err){
+        } catch (err) {
             setErrorMessage(err.message);
         }
     }
@@ -33,13 +33,16 @@ const Register = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
+                    padding: 5,
+                    border: 1,
+                    borderRadius: '16px',
                 }}
             >
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                     <HowToRegOutlined />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign Up
+                    Daftar
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
@@ -71,14 +74,22 @@ const Register = () => {
                     >
                         Sign In
                     </Button>
-                    <Grid container>
-                        <Grid item>
-                            <Link to="/login">
-                                {"Already have an account? Sign in"}
-                            </Link>
-                        </Grid>
-                    </Grid>
                 </Box>
+            </Box>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    padding: 2
+                }}
+            >
+                <Typography>
+                    Sudah punya akun?
+                    <Link to="/login">
+                        {"Masuk"}
+                    </Link>
+                </Typography>
             </Box>
         </Container>
     )
