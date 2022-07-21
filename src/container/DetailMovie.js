@@ -7,20 +7,34 @@ import NavBar from "../components/Navbar"
 const DetailMovie = () => {
     const IMAGE_URL = "https://image.tmdb.org/t/p/original"
     let params = useParams()
-    let uri = `movie/${params?.movieId}`
-    const [movieDetail, setMovieDetail] = useState(uri)
+    let uriDetail = `movie/${params?.movieId}`
+    let uriTrailer = `movie/${params?.movieId}/videos`
+    const [movieDetail, setMovieDetail] = useState(uriDetail)
+    const [trailerMovie, setTrailerMovie] = useState(uriTrailer)
 
     useEffect(() => {
         const fetchDetailMovie = async () => {
             try {
-                const query = await tmdb.get(uri)
+                const query = await tmdb.get(uriDetail)
                 setMovieDetail(query.data)
             } catch (err) {
                 console.log(err)
             }
         }
         fetchDetailMovie()
-    }, [uri])
+    }, [uriDetail])
+
+    useEffect(() => {
+        const fetchTrailer = async () => {
+            try {
+                const query = await tmdb.get(uriTrailer)
+                setTrailerMovie(query.data.results)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        fetchTrailer()
+    }, [uriTrailer])
 
     return (
         <div className='App'>
@@ -82,7 +96,19 @@ const DetailMovie = () => {
                         </Typography>
                     </CardContent>
                 </Card>
+                <Box
+                    width={852}
+                >
+                    <Typography  variant='h6'>Trailer:</Typography>
+                    <CardMedia
+                        component="iframe"
+                        image={`https://www.youtube.com/embed/${trailerMovie[0].key}`}
+                        height={480}
+
+                    />
+                </Box>
             </Box>
+            <hr />
             <footer>2022 @derict</footer>
         </div>
     )
