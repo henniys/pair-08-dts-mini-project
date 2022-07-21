@@ -12,6 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 
 import reportWebVitals from './reportWebVitals'
 import DetailMovie from './container/DetailMovie'
+import Cari from './container/Cari'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +20,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}/>
+        <Route path="cari/:keyWord" element={<Cari />} />
         <Route path="login" element={
           <ProtectedRoute loginOnly={false}>
             <Login />

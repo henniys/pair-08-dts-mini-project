@@ -1,7 +1,6 @@
-import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { AppBar, Box, Toolbar, Typography } from '@mui/material'
+import { AppBar, Box, Toolbar, Typography, InputBase } from '@mui/material'
 import { Logout, Movie } from '@mui/icons-material'
 
 import { signOut } from 'firebase/auth'
@@ -10,11 +9,18 @@ import { auth } from '../config/firebase'
 const NavBar = () => {
     const navigate = useNavigate()
 
-    const onLogout = async() => {
-        try{
+    const onLogout = async () => {
+        try {
             await signOut(auth)
             navigate("/login")
-        }catch(err){
+        } catch (err) {
+            console.log(err)
+        }
+    };
+    const onSearch = async (e) => {
+        try {
+            navigate(`/cari/${e}`)
+        } catch (err) {
             console.log(err)
         }
     };
@@ -24,14 +30,27 @@ const NavBar = () => {
                 <Toolbar>
                     <Movie sx={{ display: 'flex', mr: 2 }} />
                     <Typography variant='h6' sx={{
-                            flexGrow: 1,
-                            textAlign: 'left'
-                        }}>
+                        flexGrow: 1,
+                        textAlign: 'left'
+                    }}>
                         <Link style={{ color: 'inherit', textDecoration: 'inherit' }} to="/">
                             Trending Movies
                         </Link>
                     </Typography>
-                    <Typography>Welcome {auth.currentUser?.email}</Typography>
+                    <Typography
+                        sx={{
+                            flexGrow: 1
+                        }}
+                    >{auth.currentUser?.email}</Typography>
+                    <InputBase
+                        placeholder="Search…"
+                        inputProps={{ 'aria-label': 'search' }}
+                        onKeyDown={(e) => {
+                            if(e.key === 'Enter'){
+                                onSearch(e.target.value)
+                            }
+                        }}
+                    />
                     <Box sx={{ display: 'flex' }}>
                         <Box sx={{ padding: 1 }}>
                             <Logout onClick={onLogout} />
