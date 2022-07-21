@@ -18,8 +18,7 @@ function Movie() {
   const getMovie = async (id) => {
     try {
       const response = await axios.get(
-        "https://api.themoviedb.org/3/movie/{movie_id}?api_key=5a40bd2ee20bfcb4ca8824ca74e3f9cb" +
-          id,
+        `{https://api.themoviedb.org/3/movie/${id}?5a40bd2ee20bfcb4ca8824ca74e3f9cb}`,
         {
           params: {
             api_key: "5a40bd2ee20bfcb4ca8824ca74e3f9cb",
@@ -27,7 +26,7 @@ function Movie() {
         }
       );
 
-      setMovie(response.data);
+      setMovie(response);
     } catch (error) {
       console.log(error);
     }
@@ -37,10 +36,10 @@ function Movie() {
     setMovieLogo(null);
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_IMDB_URL}/movie/${id}/images`,
+        `{https://api.themoviedb.org/3/movie/${id}/images?api_key=5a40bd2ee20bfcb4ca8824ca74e3f9cb&language=en}`,
         {
           params: {
-            api_key: process.env.REACT_APP_IMDB_API_KEY,
+            api_key: "5a40bd2ee20bfcb4ca8824ca74e3f9cb",
             language: "en",
           },
         }
@@ -53,8 +52,8 @@ function Movie() {
   };
 
   useEffect(() => {
-    getMovie(params.id);
-    getImagesMovie(params.id);
+    getMovie();
+    getImagesMovie();
   }, [params.id]);
 
   return (
