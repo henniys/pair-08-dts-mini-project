@@ -2,7 +2,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCB9yGVX5hz3689KYPnH7cREAn-XFLs9Tw",
+  //apiKey: "AIzaSyCB9yGVX5hz3689KYPnH7cREAn-XFLs9Tw",
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: "mood-meter-3af98.firebaseapp.com",
   projectId: "mood-meter-3af98",
   storageBucket: "mood-meter-3af98.appspot.com",
