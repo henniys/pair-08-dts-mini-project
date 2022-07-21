@@ -11,6 +11,8 @@ import Register from "./container/Register";
 import NoMatch from "./container/NoMatch";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DetailMovie from "./container/DetailMovie";
+import TrendingItem from "./components/TrendingItem";
+import Movie from "./pages/Movie";
 
 const theme = createTheme({
   palette: {
@@ -52,7 +54,7 @@ root.render(
           path="movie/:movieId"
           element={
             <ProtectedRoute loginOnly={true}>
-              <DetailMovie />
+              <Movie />
             </ProtectedRoute>
           }
         />
