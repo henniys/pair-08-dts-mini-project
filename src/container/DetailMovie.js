@@ -102,7 +102,7 @@ const DetailMovie = () => {
                     <Typography  variant='h6'>Trailer:</Typography>
                     <CardMedia
                         component="iframe"
-                        image={`https://www.youtube.com/embed/${trailerMovie[0].key}`}
+                        image={`https://www.youtube.com/embed/${trailerMovie[0]?.key}`}
                         height={480}
 
                     />

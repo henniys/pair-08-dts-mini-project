@@ -36,7 +36,7 @@ const Home = () => {
             >
                 {
                     movies.map(movie => (
-                        <MovieCard key={movie.title} movie={movie}></MovieCard>
+                        <MovieCard key={movie.id * Math.random()} movie={movie}></MovieCard>
                     ))
                 }
             </Box>

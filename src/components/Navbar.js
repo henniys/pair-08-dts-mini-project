@@ -11,6 +11,7 @@ import {
   Avatar,
   Button,
   Tooltip,
+  InputBase,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Logout, Movie } from "@mui/icons-material";
@@ -56,6 +57,7 @@ const Navbar = () => {
           <Link to="/">
             <img src={logo} alt="logo" style={{ width: 25 }} />
           </Link>
+          <Movie sx={{ display: "flex", mr: 2 }} />
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -167,6 +169,15 @@ const Navbar = () => {
                   </Typography>
                 </Link>
               </MenuItem>
+              <InputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    onSearch(e.target.value);
+                  }
+                }}
+              />
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
