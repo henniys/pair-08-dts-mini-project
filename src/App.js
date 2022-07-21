@@ -1,14 +1,15 @@
-import './App.css'
+import "./App.css";
+import Footer from "./components/Footer";
 
-import NavBar from './components/Navbar'
-import Home from './container/Home'
+import NavBar from "./components/Navbar";
+import Home from "./container/Home";
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <NavBar />
       <Home />
-      <footer>2022 @derict</footer>
+      <Footer />
     </div>
   );
 }

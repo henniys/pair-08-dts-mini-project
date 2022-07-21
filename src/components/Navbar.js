@@ -1,23 +1,22 @@
-import * as React from "react";
+import { Logout } from "@mui/icons-material";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
+  Avatar,
   Box,
-  Toolbar,
-  Typography,
+  Button,
+  Container,
   IconButton,
+  InputBase,
   Menu,
   MenuItem,
-  Container,
-  Avatar,
-  Button,
+  Toolbar,
   Tooltip,
-  InputBase,
+  Typography,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { Logout, Movie } from "@mui/icons-material";
-import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
+import * as React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
 // logo
 import logo from "../assets/logo.svg";
@@ -28,6 +27,13 @@ const Navbar = () => {
     try {
       await signOut(auth);
       navigate("/login");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const onSearch = async (e) => {
+    try {
+      navigate(`/cari/${e}`);
     } catch (err) {
       console.log(err);
     }
@@ -57,7 +63,6 @@ const Navbar = () => {
           <Link to="/">
             <img src={logo} alt="logo" style={{ width: 25 }} />
           </Link>
-          <Movie sx={{ display: "flex", mr: 2 }} />
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -169,15 +174,6 @@ const Navbar = () => {
                   </Typography>
                 </Link>
               </MenuItem>
-              <InputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    onSearch(e.target.value);
-                  }
-                }}
-              />
             </Menu>
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
@@ -234,7 +230,16 @@ const Navbar = () => {
               </Link>
             </Button>
           </Box>
-
+          <InputBase
+            sx={{ color: "white" }}
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                onSearch(e.target.value);
+              }
+            }}
+          />
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
